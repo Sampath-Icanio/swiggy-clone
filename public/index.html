@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swiggy — Order Food Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BANNER: controlled by theme -->
+  <div id="festival-banner" class="festival-banner hidden"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="var(--brand)"/>
+          <path d="M8 20 Q16 8 24 20" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <circle cx="16" cy="20" r="3" fill="white"/>
+        </svg>
+        <span class="logo-text">swiggy</span>
+      </div>
+      <div class="nav-location">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Chennai, Tamil Nadu</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-actions">
+        <a href="#">Sign In</a>
+        <a href="#" class="btn-primary">Get the App</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 id="hero-headline">Order food &amp;<br>groceries online</h1>
+        <p id="hero-sub">Hot food delivered in 30 minutes. Fresh groceries at your doorstep.</p>
+        <div class="search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search for restaurants or dishes…" />
+          <button>Search</button>
+        </div>
+      </div>
+      <div class="hero-img" id="hero-image">
+        <div class="food-bowl">
+          <div class="bowl-base"></div>
+          <div class="food-item f1"></div>
+          <div class="food-item f2"></div>
+          <div class="food-item f3"></div>
+          <div class="steam s1"></div>
+          <div class="steam s2"></div>
+          <div class="steam s3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFERS STRIP -->
+  <section class="offers-strip">
+    <div class="offers-inner">
+      <div class="offer-pill" id="offer-pill-1">
+        <span class="offer-icon">🎉</span>
+        <span>50% off on first order</span>
+      </div>
+      <div class="offer-pill" id="offer-pill-2">
+        <span class="offer-icon">⚡</span>
+        <span>Free delivery above ₹299</span>
+      </div>
+      <div class="offer-pill" id="offer-pill-3">
+        <span class="offer-icon">🍔</span>
+        <span>Burgers from ₹99</span>
+      </div>
+      <div class="offer-pill" id="offer-pill-4">
+        <span class="offer-icon">🛒</span>
+        <span>Groceries in 10 mins</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories">
+    <div class="section-inner">
+      <h2 class="section-title">What's on your mind?</h2>
+      <div class="category-grid">
+        <div class="cat-card"><div class="cat-icon">🍕</div><span>Pizza</span></div>
+        <div class="cat-card"><div class="cat-icon">🍔</div><span>Burgers</span></div>
+        <div class="cat-card"><div class="cat-icon">🍜</div><span>Noodles</span></div>
+        <div class="cat-card"><div class="cat-icon">🍱</div><span>Biryani</span></div>
+        <div class="cat-card"><div class="cat-icon">🥗</div><span>Healthy</span></div>
+        <div class="cat-card"><div class="cat-icon">🍰</div><span>Desserts</span></div>
+        <div class="cat-card"><div class="cat-icon">☕</div><span>Beverages</span></div>
+        <div class="cat-card"><div class="cat-icon">🥐</div><span>Breakfast</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESTAURANTS -->
+  <section class="restaurants">
+    <div class="section-inner">
+      <h2 class="section-title">Top restaurants near you</h2>
+      <div class="restaurant-grid">
+        <div class="rest-card">
+          <div class="rest-img" style="background:linear-gradient(135deg,#FF6B35,#F7931E);">
+            <span class="rest-emoji">🍕</span>
+            <div class="rest-discount">50% OFF</div>
+          </div>
+          <div class="rest-info">
+            <h3>Pizza Palace</h3>
+            <div class="rest-meta">
+              <span class="rating">★ 4.3</span>
+              <span class="dot-sep">·</span>
+              <span>30–40 min</span>
+              <span class="dot-sep">·</span>
+              <span>₹250 for two</span>
+            </div>
+            <p class="rest-tags">Italian · Fast Food</p>
+          </div>
+        </div>
+
+        <div class="rest-card">
+          <div class="rest-img" style="background:linear-gradient(135deg,#2C3E50,#4CA1AF);">
+            <span class="rest-emoji">🍔</span>
+            <div class="rest-discount">₹100 OFF</div>
+          </div>
+          <div class="rest-info">
+            <h3>Burger Bliss</h3>
+            <div class="rest-meta">
+              <span class="rating">★ 4.5</span>
+              <span class="dot-sep">·</span>
+              <span>20–30 min</span>
+              <span class="dot-sep">·</span>
+              <span>₹350 for two</span>
+            </div>
+            <p class="rest-tags">American · Burgers</p>
+          </div>
+        </div>
+
+        <div class="rest-card">
+          <div class="rest-img" style="background:linear-gradient(135deg,#833ab4,#fd1d1d);">
+            <span class="rest-emoji">🍱</span>
+            <div class="rest-discount">FREE DELIVERY</div>
+          </div>
+          <div class="rest-info">
+            <h3>Biryani House</h3>
+            <div class="rest-meta">
+              <span class="rating">★ 4.7</span>
+              <span class="dot-sep">·</span>
+              <span>35–45 min</span>
+              <span class="dot-sep">·</span>
+              <span>₹400 for two</span>
+            </div>
+            <p class="rest-tags">Indian · Biryani</p>
+          </div>
+        </div>
+
+        <div class="rest-card">
+          <div class="rest-img" style="background:linear-gradient(135deg,#11998e,#38ef7d);">
+            <span class="rest-emoji">🥗</span>
+            <div class="rest-discount">20% OFF</div>
+          </div>
+          <div class="rest-info">
+            <h3>Green Bowl</h3>
+            <div class="rest-meta">
+              <span class="rating">★ 4.2</span>
+              <span class="dot-sep">·</span>
+              <span>25–35 min</span>
+              <span class="dot-sep">·</span>
+              <span>₹300 for two</span>
+            </div>
+            <p class="rest-tags">Healthy · Salads</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="var(--brand)"/>
+          <path d="M8 20 Q16 8 24 20" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <circle cx="16" cy="20" r="3" fill="white"/>
+        </svg>
+        <span class="logo-text">swiggy</span>
+      </div>
+      <p style="color:#999; font-size:13px; margin-top:8px;">© 2025 Swiggy Clone — DevOps Training Demo</p>
+    </div>
+  </footer>
+
+  <script src="theme.js"></script>
+</body>
+</html>

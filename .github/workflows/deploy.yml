@@ -1,0 +1,145 @@
+# ============================================================
+# GitHub Actions — CI/CD Pipeline
+# App: Swiggy Clone (DevOps Training Demo)
+# Presenter: Sampath Kumar — Day 4, Session 2
+#
+# TEACHING FLOW:
+#   Step 1 — Show this file empty, explain structure
+#   Step 2 — Add checkout + validate
+#   Step 3 — Add Docker build (with ACTIVE_THEME)
+#   Step 4 — Add Docker push
+#   Step 5 — Add SSH deploy to AWS EC2
+# ============================================================
+
+name: Deploy Swiggy Clone
+
+# ── TRIGGER ──────────────────────────────────────────────────
+# Pipeline runs on every push to main branch
+# TEACHING POINT: This replaces the manual "SSH → docker pull → restart" process
+on:
+  push:
+    branches: [main]
+
+# ── ENVIRONMENT VARIABLES ────────────────────────────────────
+env:
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/swiggy-clone
+
+# ── JOBS ─────────────────────────────────────────────────────
+jobs:
+
+  # ── JOB 1: VALIDATE ────────────────────────────────────────
+  validate:
+    name: Validate files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        # TEACHING POINT: This pulls our code into the runner VM
+
+      - name: Check required files exist
+        run: |
+          echo "Checking project structure..."
+          test -f public/index.html && echo "✅ index.html found"
+          test -f public/style.css  && echo "✅ style.css found"
+          test -f public/theme.js   && echo "✅ theme.js found"
+          test -f Dockerfile         && echo "✅ Dockerfile found"
+          echo "All files validated!"
+
+      - name: Validate HTML structure
+        run: |
+          grep -q "festival-banner" public/index.html && echo "✅ Banner element present"
+          grep -q "hero-headline"   public/index.html && echo "✅ Hero headline present"
+          grep -q "theme.js"        public/index.html && echo "✅ theme.js linked"
+
+  # ── JOB 2: BUILD & PUSH ────────────────────────────────────
+  build-and-push:
+    name: Build Docker image & push
+    runs-on: ubuntu-latest
+    needs: validate   # Only runs if validate passes
+    # TEACHING POINT: 'needs' creates pipeline dependency — gates matter
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          # TEACHING POINT: Credentials come from GitHub Secrets — NEVER hardcode them
+
+      - name: Build Docker image
+        run: |
+          echo "Building image with theme: ${{ secrets.ACTIVE_THEME }}"
+          docker build \
+            --build-arg ACTIVE_THEME=${{ secrets.ACTIVE_THEME }} \
+            -t ${{ env.IMAGE_NAME }}:latest \
+            -t ${{ env.IMAGE_NAME }}:${{ github.sha }} \
+            .
+          # TEACHING POINT: We pass ACTIVE_THEME as a build argument.
+          # Changing the secret + pushing = different theme deployed. Zero manual work.
+
+      - name: Push image to Docker Hub
+        run: |
+          docker push ${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          echo "✅ Image pushed: ${{ env.IMAGE_NAME }}:latest"
+
+  # ── JOB 3: DEPLOY TO AWS EC2 ───────────────────────────────
+  deploy:
+    name: Deploy to AWS EC2
+    runs-on: ubuntu-latest
+    needs: build-and-push   # Only deploy if build succeeded
+
+    steps:
+      - name: Deploy via SSH to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "=== Starting deployment ==="
+
+            # Pull the latest image
+            docker pull ${{ env.IMAGE_NAME }}:latest
+
+            # Stop and remove old container (if running)
+            docker stop swiggy-clone 2>/dev/null || true
+            docker rm   swiggy-clone 2>/dev/null || true
+
+            # Run new container
+            docker run -d \
+              --name swiggy-clone \
+              --restart unless-stopped \
+              -p 80:80 \
+              ${{ env.IMAGE_NAME }}:latest
+
+            echo "=== Verifying deployment ==="
+            sleep 3
+            curl -f http://localhost/health && echo "✅ Health check passed!"
+
+            echo "=== Deploy complete! ==="
+            echo "App live at: http://${{ secrets.EC2_HOST }}"
+
+  # ── JOB 4: NOTIFY ──────────────────────────────────────────
+  notify:
+    name: Notify on completion
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: always()   # Run even if deploy failed
+
+    steps:
+      - name: Print deploy summary
+        run: |
+          echo "================================"
+          echo "DEPLOY SUMMARY"
+          echo "================================"
+          echo "Repo:    ${{ github.repository }}"
+          echo "Branch:  ${{ github.ref_name }}"
+          echo "Commit:  ${{ github.sha }}"
+          echo "Theme:   ${{ secrets.ACTIVE_THEME }}"
+          echo "Status:  ${{ needs.deploy.result }}"
+          echo "================================"
