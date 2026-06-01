@@ -73,8 +73,7 @@ jobs:
       - name: Build Docker image
         run: |
           echo "Building image with theme: ${{ secrets.ACTIVE_THEME }}"
-          docker build --build-arg ACTIVE_THEME=${{ secrets.ACTIVE_THEME }} -t ${{ env.IMAGE_NAME }}:latest -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
-
+          docker build --build-arg ACTIVE_THEME="${{ secrets.ACTIVE_THEME }}" -t ${{ env.IMAGE_NAME }}:latest -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
       - name: Push image to Docker Hub
         run: |
           docker push ${{ env.IMAGE_NAME }}:latest
