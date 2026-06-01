@@ -135,3 +135,4 @@ Use these to pause and verify understanding:
 
 3. *"Why do we have a `needs: validate` in the build job?"*
    - Answer: So a broken HTML file never reaches production. The gate stops the pipeline early.
+# first pipeline run
