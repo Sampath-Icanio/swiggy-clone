@@ -19,8 +19,7 @@ COPY public/ .
 # We replace the placeholder {{ACTIVE_THEME}} in theme.js
 # with the actual theme name at build time.
 # The pipeline controls which theme gets baked in.
-RUN sed -i "s|{{ACTIVE_THEME}}|${ACTIVE_THEME}|g" theme.js
-
+RUN sed -i "s/{{ACTIVE_THEME}}/${ACTIVE_THEME}/g" theme.js
 # ---- Stage 2: Runtime ----
 FROM nginx:alpine
 
