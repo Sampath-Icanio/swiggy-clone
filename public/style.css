@@ -72,6 +72,42 @@
   --nav-shadow:   rgba(156,39,176,0.08);
 }
 
+/* Valentine's Day theme */
+[data-theme="valentine"] {
+  --brand:        #E91E8C;
+  --brand-dark:   #C2166F;
+  --bg:           #FFF0F5;
+  --bg-secondary: #FFE4EF;
+  --text-primary: #3D0020;
+  --text-secondary: #880E4F;
+  --hero-bg:      #FFE4EF;
+  --hero-bg-2:    #FFF0F5;
+  --banner-bg:    linear-gradient(90deg, #E91E8C, #FF6FB7, #E91E8C);
+  --banner-text:  #FFFFFF;
+  --offer-bg:     #FFE4EF;
+  --offer-border: #F48FB1;
+  --card-shadow:  rgba(233,30,140,0.15);
+  --nav-shadow:   rgba(233,30,140,0.08);
+}
+
+/* Independence Day theme (India — saffron, white, green) */
+[data-theme="independence"] {
+  --brand:        #FF6700;
+  --brand-dark:   #E05500;
+  --bg:           #FFFFFF;
+  --bg-secondary: #F5FFF7;
+  --text-primary: #1A1A1A;
+  --text-secondary: #2E7D32;
+  --hero-bg:      #FFF8F0;
+  --hero-bg-2:    #F0FFF4;
+  --banner-bg:    linear-gradient(90deg, #FF6700 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%);
+  --banner-text:  #000080;
+  --offer-bg:     #FFF8F0;
+  --offer-border: #FF6700;
+  --card-shadow:  rgba(19,136,8,0.12);
+  --nav-shadow:   rgba(255,103,0,0.08);
+}
+
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -385,4 +421,34 @@ body {
 @keyframes sparkle-fall {
   0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
   100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* ===== VALENTINE HEARTS ===== */
+.heart-float {
+  position: fixed;
+  pointer-events: none;
+  font-size: 20px;
+  animation: heart-rise 5s ease-in infinite;
+  z-index: 999;
+}
+@keyframes heart-rise {
+  0%   { transform: translateY(100vh) scale(0.5) rotate(-10deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(-80px) scale(1.2) rotate(10deg); opacity: 0; }
+}
+
+/* ===== INDEPENDENCE DAY PARTICLES ===== */
+.flag-particle {
+  position: fixed;
+  pointer-events: none;
+  width: 10px;
+  height: 6px;
+  border-radius: 2px;
+  animation: flag-fall 4s linear infinite;
+  z-index: 999;
+}
+@keyframes flag-fall {
+  0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }

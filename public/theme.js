@@ -58,6 +58,32 @@ const themes = {
       { icon: "🎨", text: "Festival combos — feeds 4" },
       { icon: "🪅", text: "Free dessert above ₹399" }
     ]
+  },
+
+  valentine: {
+    banner: "💝 Happy Valentine's Day! Free dessert on every order today — Code: LOVE25 💝",
+    headline: "Share love with<br>delicious food!",
+    sub: "Surprise your special someone with their favourite meal delivered in 30 minutes.",
+    hearts: true,
+    offers: [
+      { icon: "💝", text: "Valentine special — Free dessert" },
+      { icon: "🍫", text: "Couple combos from ₹399" },
+      { icon: "🌹", text: "Chocolate platters from ₹199" },
+      { icon: "💌", text: "Send a meal as a gift" }
+    ]
+  },
+
+  independence: {
+    banner: "🇮🇳 Happy Independence Day! Free delivery on all orders — Jai Hind! 🇮🇳",
+    headline: "Celebrate freedom with<br>great Indian food!",
+    sub: "Desi flavours delivered to your doorstep. Free delivery on us today — Jai Hind!",
+    flags: true,
+    offers: [
+      { icon: "🇮🇳", text: "Independence Day — Free delivery" },
+      { icon: "🍛", text: "Desi thalis from ₹149" },
+      { icon: "🎆", text: "Tricolour combos — 47% off" },
+      { icon: "🥘", text: "Regional specials today only" }
+    ]
   }
 };
 
@@ -103,6 +129,37 @@ const themes = {
       document.body.appendChild(s);
       setTimeout(() => s.remove(), 5000);
     }, 600);
+  }
+
+  /* Valentine hearts */
+  if (t.hearts) {
+    const heartEmojis = ["💝", "💖", "💗", "💓", "❤️", "💕", "🌹"];
+    setInterval(() => {
+      const h = document.createElement("div");
+      h.className = "heart-float";
+      h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDuration = (3 + Math.random() * 3) + "s";
+      h.style.fontSize = (14 + Math.random() * 18) + "px";
+      h.style.animationDelay = (Math.random() * 2) + "s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 6000);
+    }, 700);
+  }
+
+  /* Independence Day flag particles */
+  if (t.flags) {
+    const colors = ["#FF6700", "#FFFFFF", "#138808", "#000080"];
+    setInterval(() => {
+      const f = document.createElement("div");
+      f.className = "flag-particle";
+      f.style.left = Math.random() * 100 + "vw";
+      f.style.background = colors[Math.floor(Math.random() * colors.length)];
+      f.style.animationDuration = (3 + Math.random() * 3) + "s";
+      f.style.animationDelay = (Math.random() * 2) + "s";
+      document.body.appendChild(f);
+      setTimeout(() => f.remove(), 6000);
+    }, 400);
   }
 
   console.log("[Swiggy Clone] Theme applied:", key);
