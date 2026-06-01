@@ -73,13 +73,7 @@ jobs:
       - name: Build Docker image
         run: |
           echo "Building image with theme: ${{ secrets.ACTIVE_THEME }}"
-          docker build \
-            --build-arg ACTIVE_THEME=${{ secrets.ACTIVE_THEME }} \
-            -t ${{ env.IMAGE_NAME }}:latest \
-            -t ${{ env.IMAGE_NAME }}:${{ github.sha }} \
-            .
-          # TEACHING POINT: We pass ACTIVE_THEME as a build argument.
-          # Changing the secret + pushing = different theme deployed. Zero manual work.
+          docker build --build-arg ACTIVE_THEME=${{ secrets.ACTIVE_THEME }} -t ${{ env.IMAGE_NAME }}:latest -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
 
       - name: Push image to Docker Hub
         run: |
