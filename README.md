@@ -137,3 +137,4 @@ Use these to pause and verify understanding:
    - Answer: So a broken HTML file never reaches production. The gate stops the pipeline early.
 # first pipeline-run
 Demo
+Theme changed to Diwali
