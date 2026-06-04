@@ -139,3 +139,5 @@ Use these to pause and verify understanding:
 Demo
 Theme changed to Diwali
 Validation Check
+
+UI changes from Github
