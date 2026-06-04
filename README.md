@@ -1,4 +1,4 @@
-# Swiggy Clone — DevOps Training Demo
+l# Swiggy Clone — DevOps Training Demo
 ### Day 4, Session 2 | Presenter: Sampath Kumar
 
 ---
@@ -141,3 +141,4 @@ Theme changed to Diwali
 Validation Check
 
 UI changes from Github
+Holi Theme
