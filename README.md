@@ -138,3 +138,4 @@ Use these to pause and verify understanding:
 # first pipeline-run
 Demo
 Theme changed to Diwali
+Validation Check
